@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WSConvertisseur.Models
 {
+    /// <summary>
+    /// Classe comportant toutes les informations d'une devise
+    /// </summary>
     public class Devise
     {
         public int Id { get; set; }
@@ -16,11 +19,26 @@ namespace WSConvertisseur.Models
         {
 
         }
+        /// <summary>
+        /// Propriété devise contenant les informations d'une devise
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="nomDevise"></param>
+        /// <param name="taux"></param>
         public Devise(int id, string nomDevise, double taux)
         {
             Id = id;
             NomDevise = nomDevise;
             Taux = taux;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var devise = obj as Devise;
+            return devise != null &&
+                   Id == devise.Id &&
+                   NomDevise == devise.NomDevise &&
+                   Taux == devise.Taux;
         }
     }
 

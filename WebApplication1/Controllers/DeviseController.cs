@@ -11,7 +11,7 @@ namespace WSConvertisseur.Controllers
     /// <summary>
     /// Controller des devises
     /// </summary>
-    [Produces("application/json")]
+    ///[Produces("application/xml")]
     [Route("api/Devise")]
     public class DeviseController : Controller
     {
@@ -37,7 +37,7 @@ namespace WSConvertisseur.Controllers
         // GET: api/Devise
         [ProducesResponseType(typeof(IEnumerable<Devise>), 200)]
         [HttpGet]
-        public IEnumerable<Devise> GetAll()
+        public async Task<IEnumerable<Devise>> GetAll()
         {
             return devises;
         }
@@ -53,7 +53,7 @@ namespace WSConvertisseur.Controllers
         [HttpGet("{id}", Name = "GetDevise")]
         [ProducesResponseType(typeof(Devise), 200)]
         [ProducesResponseType(404)]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             Devise devise = devises.FirstOrDefault((d) => d.Id == id);
             if (devise == null)
@@ -74,7 +74,7 @@ namespace WSConvertisseur.Controllers
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public IActionResult Post([FromBody]Devise devise)
+        public async Task<IActionResult> Post([FromBody]Devise devise)
         {
             if (!ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace WSConvertisseur.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult Put(int id, [FromBody]Devise devise)
+        public async Task<IActionResult> Put(int id, [FromBody]Devise devise)
         {
             if (!ModelState.IsValid)
             {
@@ -126,7 +126,7 @@ namespace WSConvertisseur.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(Devise), 200)]
         [ProducesResponseType(404)]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             Devise devise = devises.FirstOrDefault((d) => d.Id == id);
             if (devise == null)
